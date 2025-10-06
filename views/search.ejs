@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<h1>Search for your Anime here...</h1>
+<div class="search">
+  <form action="/search" method="post">
+    <input type="text" name="search" id="search" />
+    <input type="submit" id="btn-primary" value="Go" />
+  </form>
+
+  <div class="anime-grid">
+    <% if (locals.results && locals.results.length > 0) { %>
+      <%- console.log(locals.results.data); %> 
+      <% locals.results.forEach(anime => { %>
+          <div class="anime-card shadow_accent">
+          <a href="<%= anime.url %>" target="_blank">
+          <img
+            src="<%= anime.images.jpg.image_url %>"
+            alt="<%= anime.title %>"
+            class="anime-img"
+          />
+          </a>
+          <div class="anime-info">
+            <h3>
+              <a href="<%= anime.url %>" target="_blank"><%= anime.title %></a>
+            </h3>
+            <p>
+              <strong>Type:</strong> <%= anime.type %> |
+              <strong>Episodes:</strong> <%= anime.episodes || "?" %>
+            </p>
+            <p><strong>Score:</strong> <%= anime.score || "N/A" %></p>
+            <p class="synopsis">
+              <%= anime.synopsis ? anime.synopsis.substring(0,120) + "..." : "No synopsis available." %>
+            </p>
+            <a href="/anime/<%= anime.mal_id %>">View More</a>
+          </div>
+        </div>         
+    <% })} else { %>
+      <h2>No results found.</h2>
+    <% } %>
+  </div>
+</div>
+<%- include('partials/footer') %>

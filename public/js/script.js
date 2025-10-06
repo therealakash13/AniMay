@@ -6,4 +6,12 @@ $(function () {
   $("#close-btn").on("click", function () {
     $("#nav-links").removeClass("show");
   });
+
+  $(".flip").click(function () {
+    $(this).parents(".wrap").addClass("flipped");
+  });
+
+  $(".flipback").click(function () {
+    $(this).parents(".wrap").removeClass("flipped");
+  });
 });
