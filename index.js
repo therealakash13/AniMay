@@ -30,6 +30,18 @@ app.get("/search", (req, res) => {
   return res.render("search");
 });
 
+app.get("/anime/:id",async(req, res) => {
+ const animeId =req.params.id;
+  try {
+    const response = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}`)
+ 
+    return res.render("animePage",{data:response.data.data});
+  } catch (error) {
+    console.log("Error", error.message);    
+  }
+  
+});
+
 app.post("/search", async (req, res) => {
   const searchString = req.body.search;
   console.log("User searched:", searchString);
