@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<% if (locals.characters) { %>
+  <div class="characters-grid">
+    <% locals.characters.forEach(c => { %>
+      <div class="character-card">
+        <!-- Character info -->
+        <a href="<%= c.character.url %>" target="_blank">
+          <img src="<%= c.character.images.jpg.image_url %>" alt="<%= c.character.name %>" class="character-img" />
+        </a>
+        <h3><%= c.character.name %></h3>
+        <p><strong>Role:</strong> <%= c.role %></p>
+        <p><strong>Favorites:</strong> <%= c.favorites %></p>
+
+        <!-- Voice actors -->
+        <div class="voice-actors">
+            <p><strong class="va-toggle">Voice Actors:(<%= c.voice_actors.length %>) <span class="material-symbols-outlined">keyboard_arrow_down</span></strong></p>
+          <div class="va-content hidden">            
+            <% c.voice_actors.forEach(va => { %>
+                <div class="voice-actor">
+                <a href="<%= va.person.url %>" target="_blank">
+                    <img src="<%= va.person.images.jpg.image_url %>" alt="<%= va.person.name %>" class="va-img" />
+                </a>
+                <div class="va-info">
+                    <p><%= va.person.name %></p> 
+                    <span>(<%= va.language %>)</span>
+                </div>
+                </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } else { %>
+  <h2>No data here</h2>
+<% } %>
+
+<%- include('partials/footer') %>

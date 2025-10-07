@@ -192,7 +192,7 @@ select#unit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
   border-radius: var(--radius-lg);
   gap: var(--space-lg);
   transition: all 0.3s ease-in-out;
@@ -216,6 +216,7 @@ select#unit {
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  align-self: center;
 }
 
 .btn-primary:hover {
@@ -352,7 +353,7 @@ select#unit {
 }
 
 .anime-card {
-  background: var(--color-light);
+  background: var(--color-primary);
   border-radius: var(--radius-sm);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -397,4 +398,204 @@ select#unit {
   font-size: var(--text-sm);
   color: var(--color-dark);
   margin-top: var(--space-xs);
+}
+
+/* Anime Page */
+
+.anime-container {
+  width: 95%;
+  height: 90%;
+}
+
+.anime-detail {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.anime-image {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.anime-detail img {
+  min-width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.anime-info {
+  flex: 1;
+  text-align: start;
+  flex-wrap: wrap;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.side-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.side-info strong {
+  font-size: var(--text-lg);
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.side-info p {
+  font-weight: 500;
+  align-self: center;
+}
+
+.side-info .badge {
+  padding: var(--space-xs);
+  background-color: var(--color-secondary);
+  color: var(--color-accent);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  font-style: normal;
+}
+
+.side-info a {
+  background-color: var(--color-secondary);
+  width: fit-content;
+  text-align: center;
+  color: var(--color-accent);
+  padding: var(--space-xsm) var(--space-sm);
+  border-radius: var(--radius-sm);
+  align-self: center;
+  transition: all 0.3s ease;
+}
+
+.side-info a:hover {
+  scale: 1.1;
+}
+
+.anime-synopsis {
+  background-color: var(--color-secondary);
+  color: var(--color-accent);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: var(--text-lg);
+}
+
+.anime-background,
+.anime-trailer {
+  margin-top: 2rem;
+}
+
+.anime-trailer iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border-radius: var(--radius-lg);
+}
+
+/* Characters page */
+.characters-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+
+.character-card {
+  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.character-card p {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  text-align: start;
+}
+
+.character-card strong {
+  font-weight: 600;
+  color: var(--color-secondary);
+  align-self: center;
+}
+
+.character-card img {
+  max-width: 220px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+}
+
+.voice-actors {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+}
+
+.voice-actors p{
+  text-align: center;
+  cursor: pointer;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.va-content{
+  display: none;
+}
+
+.voice-actor p {
+  font-weight: 600;
+  color: var(--color-secondary);
+  align-self: start;
+  margin-bottom: 0;
+}
+
+.voice-actor span {
+  color: var(--color-text);
+  font-size: var(--text-base);
+  font-weight: 500;
+  text-align: center;
+}
+
+.voice-actor {
+  display: flex;
+  gap: var(--space-xs);
+  margin: var(--space-xsm) 0;
+}
+
+.voice-actor img {
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-round);
+}
+
+.va-info{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+@media (max-width: 1000px) {
+  .characters-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .characters-grid {
+    grid-template-columns: 1fr;
+  }
+  .voice-actor{
+    align-items: center;
+    gap: var(--space-sm);
+  }
 }

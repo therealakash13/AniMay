@@ -12,7 +12,7 @@
       <%- console.log(locals.results.data); %> 
       <% locals.results.forEach(anime => { %>
           <div class="anime-card shadow_accent">
-          <a href="<%= anime.url %>" target="_blank">
+          <a href="/anime/<%= anime.mal_id %>" target="_blank">
           <img
             src="<%= anime.images.jpg.image_url %>"
             alt="<%= anime.title %>"
@@ -21,7 +21,7 @@
           </a>
           <div class="anime-info">
             <h3>
-              <a href="<%= anime.url %>" target="_blank"><%= anime.title %></a>
+              <a href="/anime/<%= anime.mal_id %>" ><%= anime.title %></a>
             </h3>
             <p>
               <strong>Type:</strong> <%= anime.type %> |

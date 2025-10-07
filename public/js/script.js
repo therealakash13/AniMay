@@ -14,4 +14,8 @@ $(function () {
   $(".flipback").click(function () {
     $(this).parents(".wrap").removeClass("flipped");
   });
+
+$(document).on("click", ".va-toggle", function () {
+  $(this).closest(".voice-actors").find(".va-content").slideToggle(200);
+});
 });

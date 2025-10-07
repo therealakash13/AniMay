@@ -1,3 +1,84 @@
-<%- include('partials/header') %> <% if (locals.data) { %>
-<h1><%= data.title %></h1>
-<% } %> <%- include('partials/footer') %>
+<%- include('partials/header') %> 
+
+<% if (locals.anime) { %>
+
+    <div class="anime-container">
+
+        
+        <!-- Anime Header -->
+        <div class="anime-detail">
+            <div class="anime-image">
+          <img src="<%= anime.images.jpg.large_image_url %>" alt="<%= anime.title %>" />
+          <a href="<%= anime.url %>" target="_blank" class="btn-primary">View on MyAnimeList</a>
+        </div>
+        
+        <div class="anime-info">
+          <h1><%= anime.title %><span> (<em><%= anime.title_english || "N/A" %></em></span>)</h1>
+            <div class="side-info">
+                <p><strong>Japanese:</strong> <%= anime.title_japanese || "N/A" %></p>
+                <p><strong>Synonyms:</strong> <%= anime.title_synonyms.join(", ") %></p>   
+                <p><strong>Type:</strong> <%= anime.type %></p>
+                <p><strong>Episodes:</strong> <%= anime.episodes || "?" %></p>
+                <p><strong>Status:</strong> <%= anime.status %></p>
+                <p><strong>Aired:</strong> <%= anime.aired.string %></p>
+                <p><strong>Duration:</strong> <%= anime.duration %></p>
+                <p><strong>Rating:</strong> <%= anime.rating %></p> 
+                <p><strong>Score:</strong> <%= anime.score %> (by <%= anime.scored_by %> users)</p>
+                <p><strong>Rank:</strong> #<%= anime.rank %></p>
+                <p><strong>Popularity:</strong> #<%= anime.popularity %></p>
+                <p><strong>Members:</strong> <%= anime.members %></p>
+                <p><strong>Favorites:</strong> <%= anime.favorites %></p>
+
+                <p><strong>Studios: </strong> 
+                  <% anime.studios.forEach(function(studio) { %>
+                    <em class="badge"><%= studio.name %></em>
+                  <% }); %>
+                </p>
+
+                <p><strong>Producers: </strong> 
+                  <% anime.producers.forEach(function(producer) { %>
+                    <em class="badge"><%= producer.name %></em>
+                  <% }); %>
+                </p>
+                <p><strong>Genres: </strong> 
+                  <% anime.genres.forEach(function(genre) { %>
+                    <em class="badge"><%= genre.name %></em>
+                  <% }); %>
+                </p>
+                <p><strong>Themes: </strong> 
+                  <% anime.themes.forEach(function(theme) { %>
+                    <em class="badge"><%= theme.name %></em>
+                  <% }); %>
+                </p>
+                <a class="btn" href="/anime/<%= anime.mal_id %>/characters">Characters</a>
+            </div>
+          <p class="anime-synopsis"><%= anime.synopsis %></p>
+        </div>
+    </div>
+        
+      <!-- Background -->
+      <% if (anime.background) { %>
+        <section class="anime-background">
+            <h2>Background</h2>
+            <p><%= anime.background %></p>
+        </section>
+        <% } %>
+
+        <!-- Trailer -->
+      <% if (anime.trailer && anime.trailer.embed_url) { %>
+      <section class="anime-trailer">
+        <h2>Trailer</h2>
+        <iframe 
+        width="560" 
+        height="315" 
+        src="<%= anime.trailer.embed_url %>" 
+        frameborder="0" 
+        allowfullscreen>
+    </iframe>
+</section>
+<% } %>
+
+</div>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -30,16 +30,28 @@ app.get("/search", (req, res) => {
   return res.render("search");
 });
 
-app.get("/anime/:id",async(req, res) => {
- const animeId =req.params.id;
+app.get("/anime/:id", async (req, res) => {
+  const animeId = req.params.id;
   try {
-    const response = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}`)
- 
-    return res.render("animePage",{data:response.data.data});
+    const response = await axios.get(
+      `https://api.jikan.moe/v4/anime/${animeId}`
+    );
+    return res.render("animePage", { anime: response.data.data });
   } catch (error) {
-    console.log("Error", error.message);    
+    console.log("Error", error.message);
   }
-  
+});
+
+app.get("/anime/:id/characters", async (req, res) => {
+  const animeId = req.params.id;
+  try {
+    const response = await axios.get(
+      `https://api.jikan.moe/v4/anime/${animeId}/characters`
+    );
+    return res.render("characters", { characters: response.data.data });
+  } catch (error) {
+    console.log("Error", error.message);
+  }
 });
 
 app.post("/search", async (req, res) => {
