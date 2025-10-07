@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<h1>Top Recommendations</h1>
+
+ <% if (locals.recommendations && locals.recommendations.length > 0) { %>
+        <div class="recommendations-grid">
+          <% locals.recommendations.forEach(rec => { %>
+            <div class="recommendation-card">
+              
+              <!-- Anime Entries (usually 2 shows per recommendation) -->
+              <div class="entries">
+                <% rec.entry.forEach(anime => { %>
+                  <div class="entry">
+                    <a href="/anime/<%= anime.mal_id %>">
+                      <img src="<%= anime.images.jpg.image_url %>" alt="<%= anime.title %>" class="anime-img" />
+                    </a>
+                    <p class="anime-title"><%= anime.title %></p>
+                  </div>
+                <% }) %>
+              </div>
+
+              <!-- User comment/reason -->
+              <p class="recommendation-text">
+                <%= rec.content %>
+              </p>
+
+              <!-- User who recommended -->
+              <p class="recommendation-user">
+                Recommended by <a href="<%= rec.user.url %>"><%= rec.user.username %></a> 
+                on <%= new Date(rec.date).toLocaleDateString() %>
+              </p>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p>No recommendations available.</p>
+      <% } %>
+</div>
+
+<%- include('partials/footer') %>

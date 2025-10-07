@@ -205,13 +205,12 @@ select#unit {
 }
 
 .btn-primary {
-  align-self: start;
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xsm) var(--space-md);
   background-color: var(--color-secondary);
   color: var(--color-primary);
   border: none;
   border-radius: var(--radius-sm);
-  font-size: var(--text-xl);
+  font-size: var(--text-base);
   font-weight: 600;
   text-align: center;
   cursor: pointer;
@@ -347,9 +346,25 @@ select#unit {
 .anime-grid {
   margin-top: var(--space-lg);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr) ;
   gap: var(--space-md);
   width: 100%;
+}
+
+@media (max-width:1240px) {
+  .anime-grid{
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+@media (max-width:940px) {
+  .anime-grid{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media (max-width:640px) {
+  .anime-grid{
+    grid-template-columns: 1fr;
+  }
 }
 
 .anime-card {
@@ -415,12 +430,13 @@ select#unit {
 .anime-image {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-sm);
   align-items: center;
 }
 
 .anime-detail img {
-  min-width: 100%;
+  max-width: 100%;
+  min-width: 80px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
 }
@@ -434,9 +450,39 @@ select#unit {
   padding: var(--space-sm) var(--space-lg);
 }
 
+@media (max-width: 1150px) {
+  .anime-detail {
+    flex-direction: column;
+  }
+
+  .anime-info h1 {
+    order: 2; 
+  }
+
+  .anime-image {
+    order: 1;
+  }
+}
+
 .side-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width:1350px) {
+  .side-info{
+   background-color: var(--color-primary);
+   text-align: start;
+  padding: var(--space-sm) var(--space-lg);
+  margin-bottom: var(--space-sm);
+  }
+}
+
+@media (max-width:800px) {
+  .side-info{
+   grid-template-columns: 1fr;
+  }
 }
 
 .side-info strong {
@@ -482,6 +528,7 @@ select#unit {
   border-radius: var(--radius-sm);
   font-weight: 500;
   font-size: var(--text-lg);
+  text-align: start;
 }
 
 .anime-background,
@@ -598,4 +645,109 @@ select#unit {
     align-items: center;
     gap: var(--space-sm);
   }
+}
+
+/* Recommendations page */
+
+/* Grid for recommendations */
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width:1240px) {
+  .recommendations-grid{
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+@media (max-width:940px) {
+  .recommendations-grid{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media (max-width:640px) {
+  .recommendations-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Each recommendation card */
+.recommendation-card {
+  background: var(--color-primary);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  box-shadow:var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-sm-accent);
+}
+
+/* Anime entries inside a recommendation */
+.entries {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: start;
+  justify-content: center;
+}
+
+.entry {
+  text-align: center;
+  flex: 1;
+}
+
+.entry img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.entry img:hover {
+  transform: scale(1.1);
+}
+
+.anime-title {
+  margin-top: var(--space-xs);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+/* Recommendation text */
+.recommendation-text {
+  font-size: var(--text-base);
+  line-height: 1.4;
+  background: var(--color-bg);
+  padding: var(--space-sm);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  color: var(--color-secondary);
+  text-align: start;
+  font-weight: 500;
+}
+
+/* User info */
+.recommendation-user {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.recommendation-user a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+
+.recommendation-user a:hover {
+  text-decoration: underline;
 }

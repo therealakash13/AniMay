@@ -15,7 +15,17 @@ $(function () {
     $(this).parents(".wrap").removeClass("flipped");
   });
 
-$(document).on("click", ".va-toggle", function () {
-  $(this).closest(".voice-actors").find(".va-content").slideToggle(200);
-});
+  $(document).on("click", ".va-toggle", function () {
+    $(this).closest(".voice-actors").find(".va-content").slideToggle(200);
+  });
+
+  $(window)
+    .resize(function () {
+      if ($(window).width() < 1350) {
+        $(".side-info ").insertBefore(".anime-synopsis");
+      } else {
+        $(".side-info").insertAfter(".anime-info h1");
+      }
+    })
+    .trigger("resize");
 });

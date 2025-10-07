@@ -10,6 +10,7 @@
             <div class="anime-image">
           <img src="<%= anime.images.jpg.large_image_url %>" alt="<%= anime.title %>" />
           <a href="<%= anime.url %>" target="_blank" class="btn-primary">View on MyAnimeList</a>
+          <a class="btn-primary" href="/anime/<%= anime.mal_id %>/characters">View  Characters</a>
         </div>
         
         <div class="anime-info">
@@ -50,11 +51,10 @@
                     <em class="badge"><%= theme.name %></em>
                   <% }); %>
                 </p>
-                <a class="btn" href="/anime/<%= anime.mal_id %>/characters">Characters</a>
             </div>
-          <p class="anime-synopsis"><%= anime.synopsis %></p>
+          </div>
         </div>
-    </div>
+        <p class="anime-synopsis"><%= anime.synopsis %></p>
         
       <!-- Background -->
       <% if (anime.background) { %>

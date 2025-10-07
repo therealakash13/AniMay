@@ -56,8 +56,6 @@ app.get("/anime/:id/characters", async (req, res) => {
 
 app.post("/search", async (req, res) => {
   const searchString = req.body.search;
-  console.log("User searched:", searchString);
-
   try {
     const response = await axios.get("https://api.jikan.moe/v4/anime", {
       params: {
@@ -67,6 +65,47 @@ app.post("/search", async (req, res) => {
       },
     });
     return res.render("search", { results: response.data.data });
+  } catch (error) {
+    console.error("Jikan API Error:", error.code || error.message);
+
+    return res.status(500).json({
+      message: "Failed to fetch anime",
+      error: error,
+    });
+  }
+});
+
+app.get("/toprated", async (req, res) => {
+  // const searchString = req.body.search;
+  try {
+    const response = await axios.get("https://api.jikan.moe/v4/top/anime", {
+      params: {
+        limit: 12,
+      },
+    });
+    return res.render("toprated", { results: response.data.data });
+  } catch (error) {
+    console.error("Jikan API Error:", error.code || error.message);
+
+    return res.status(500).json({
+      message: "Failed to fetch anime",
+      error: error,
+    });
+  }
+});
+
+app.get("/recommendation", async (req, res) => {
+  // const searchString = req.body.search;
+  try {
+    const response = await axios.get("https://api.jikan.moe/v4/recommendations/anime", {
+      params: {
+        page: 1,
+      },
+    });
+
+    console.log(response.data.data);
+    
+    return res.render("recommendation", { recommendations: response.data.data });
   } catch (error) {
     console.error("Jikan API Error:", error.code || error.message);
 
