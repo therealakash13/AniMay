@@ -2,8 +2,8 @@
     <% if (locals.results && locals.results.length > 0) { %>
       <%- console.log(locals.results.data); %> 
       <% locals.results.forEach(anime => { %>
-          <div class="anime-card shadow_accent">
-          <a href="/anime/<%= anime.mal_id %>" target="_blank">
+          <div class="anime-card">
+          <a href="/anime/<%= anime.mal_id %>">
           <img
             src="<%= anime.images.jpg.image_url %>"
             alt="<%= anime.title %>"
@@ -15,17 +15,16 @@
               <a href="/anime/<%= anime.mal_id %>" ><%= anime.title %></a>
             </h3>
             <p>
-              <strong>Type:</strong> <%= anime.type %> |
-              <strong>Episodes:</strong> <%= anime.episodes || "?" %>
+              <strong>Type:</strong> <span id="sq"><%= anime.type %></span> |
+              <strong>Episodes:</strong> <span id="sq"><%= anime.episodes || "?" %></span> 
             </p>
-            <p><strong>Score:</strong> <%= anime.score || "N/A" %></p>
+            <p><strong>Score:</strong> <span id="round"><%= anime.score.toFixed(1) || "N/A" %></span></p>
             <p class="synopsis">
               <%= anime.synopsis ? anime.synopsis.substring(0,120) + "..." : "No synopsis available." %>
             </p>
-            <a href="/anime/<%= anime.mal_id %>">View More</a>
           </div>
         </div>         
     <% })} else { %>
-      <h2>No results found.</h2>
+      <h3>No results found.</h3>
     <% } %>
   </div>

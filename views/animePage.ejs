@@ -37,9 +37,9 @@
                 </p>
 
                 <p><strong>Producers: </strong> 
-                  <% anime.producers.forEach(function(producer) { %>
-                    <em class="badge"><%= producer.name %></em>
-                  <% }); %>
+                    <% anime.producers.forEach(function(producer) { %>
+                      <em class="badge"><%= producer.name %></em>
+                    <% }); %>
                 </p>
                 <p><strong>Genres: </strong> 
                   <% anime.genres.forEach(function(genre) { %>
@@ -55,14 +55,6 @@
           </div>
         </div>
         <p class="anime-synopsis"><%= anime.synopsis %></p>
-        
-      <!-- Background -->
-      <% if (anime.background) { %>
-        <section class="anime-background">
-            <h2>Background</h2>
-            <p><%= anime.background %></p>
-        </section>
-        <% } %>
 
         <!-- Trailer -->
       <% if (anime.trailer && anime.trailer.embed_url) { %>

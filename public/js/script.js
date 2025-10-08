@@ -28,4 +28,8 @@ $(function () {
       }
     })
     .trigger("resize");
+
+  $('#home').click(function () {
+    window.location.href='/';
+  })  
 });
