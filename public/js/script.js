@@ -29,7 +29,22 @@ $(function () {
     })
     .trigger("resize");
 
-  $('#home').click(function () {
-    window.location.href='/';
-  })  
+  $("#home").click(function () {
+    window.location.href = "/";
+  });
+
+  const $prevBtn = $('.prev');
+  const $nextBtn = $('.next');  
+
+  const currentPage = Number($prevBtn.data("page_num"));
+  const has_next_page= $nextBtn.data("has_next_page");  
+
+  if (currentPage <= 1) {
+    $prevBtn.addClass("disabled");
+  }
+
+  if(has_next_page) {
+    $nextBtn.removeClass("disabled");
+  }
+
 });

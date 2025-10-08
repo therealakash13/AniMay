@@ -26,29 +26,27 @@ server.get("/", (req, res) => {
   return res.render("index");
 });
 
-server.get("/search", (req, res) => {
-  return res.render("search");
-});
+server.get("/search", async (req, res) => {
+  const searchString = req.query.query || ""; 
+  const page_num = Number(req.query.page) || 1;
 
-server.post("/search", async (req, res) => {
-  const searchString = req.body.search;
   try {
     const response = await api.get("/anime", {
       params: {
-        page: 1,
-        limit: 9,
+        page: page_num,
+        limit: 12,
         q: searchString,
       },
     });
-    return res.render("search", { results: response.data.data });
-  } catch (error) {
-    console.error("Error:", error.code || error.message);
 
-    return res.status(500).json({
-      message: "Failed to search anime.",
-      error_message: error.message,
-      stack: error.stack,
+    return res.render("search", { 
+      results: response.data.data,
+      pagination: response.data.pagination,
+      search: searchString
     });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Failed to search anime" });
   }
 });
 
@@ -85,9 +83,10 @@ server.get("/anime/:id/characters", async (req, res) => {
 });
 
 server.get("/toprated", async (req, res) => {
+  const page_num = Number(req.query.page) || 1;
   try {
-    const response = await api.get("/top/anime", { params: { limit: 12 } });
-    return res.render("toprated", { results: response.data.data });
+    const response = await api.get("/top/anime", { params: { limit: 12, page: page_num } });        
+    return res.render("toprated", { results: response.data.data , pagination:response.data.pagination});
   } catch (error) {
     console.error("Error:", error.code || error.message);
 
@@ -111,6 +110,7 @@ server.get("/recommendation", async (req, res) => {
     );
     return res.render("recommendation", {
       recommendations: response.data.data,
+      pagination:response.data.pagination
     });
   } catch (error) {
     console.error("Error:", error.code || error.message);

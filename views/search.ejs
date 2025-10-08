@@ -2,10 +2,19 @@
 
 <h1>Search for your Anime here...</h1>
 <div class="search">
-  <form action="/search" method="post">
-    <input type="text" name="search" id="search" />
-    <input type="submit" id="btn-primary" value="Go" />
-  </form>
+ <form action="/search" method="get">
+  <input type="text" name="query" value="<%= search %>" placeholder="Search anime" />
+  <button class="btn-primary" type="submit">Go</button>
+</form>
+
+
+  <% if (locals.pagination) { %>
+    <form class="pages" action="/search/" method="get">
+      <a href="/search?query=<%= search %>&page=<%= pagination.current_page - 1 %>" class="material-symbols-outlined prev" data-page_num="<%= pagination.current_page %>">arrow_circle_left</a>
+      <strong><%= pagination.current_page %></strong>
+      <a href="/search?query=<%= search %>&page=<%= pagination.current_page + 1 %>" class="material-symbols-outlined next disabled" data-has_next_page="<%= pagination.has_next_page %>">arrow_circle_right</a>
+    </form>
+<% } %>
 
   <%- include('partials/animeGrid') %>
 </div>

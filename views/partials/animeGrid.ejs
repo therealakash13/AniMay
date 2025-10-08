@@ -18,7 +18,7 @@
               <strong>Type:</strong> <span id="sq"><%= anime.type %></span> |
               <strong>Episodes:</strong> <span id="sq"><%= anime.episodes || "?" %></span> 
             </p>
-            <p><strong>Score:</strong> <span id="round"><%= anime.score.toFixed(1) || "N/A" %></span></p>
+            <p><strong>Score:</strong> <span id="round"><%= anime.score?anime.score.toFixed(1) : "N/A" %></span></p>
             <p class="synopsis">
               <%= anime.synopsis ? anime.synopsis.substring(0,120) + "..." : "No synopsis available." %>
             </p>

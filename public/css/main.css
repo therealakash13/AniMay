@@ -224,6 +224,14 @@ select#unit {
   color: var(--color-secondary);
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+} 
+
 /* End of starter template */
 
 /* Navbar Base */
@@ -344,6 +352,10 @@ select#unit {
   }
 }
 
+.search button{
+  padding: var(--space-sm);
+}
+
 /* search result  */
 .anime-grid {
   margin-top: var(--space-lg);
@@ -367,6 +379,31 @@ select#unit {
   .anime-grid{
     grid-template-columns: 1fr;
   }
+}
+
+.pages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.pages strong{
+  font-size: var(--text-2xl);
+}
+
+.pages a{
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  scale: 1.5;
+  cursor: pointer;
+  transition: all .3s ease;
+  border: none;
+  border-radius: var(--radius-round);
+}
+
+.pages a:hover{
+  scale: 1.8;
 }
 
 .anime-card {
@@ -613,14 +650,6 @@ select#unit {
 .voice-actors p{
   text-align: center;
   cursor: pointer;
-}
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
 }
 
 .va-content{

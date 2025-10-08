@@ -2,6 +2,14 @@
 
 <h1>Top Rated Animes</h1>
 
+<% if (locals.pagination) { %>
+  <form class="pages" action="/toprated/" method="get">
+      <a href="/toprated?page=<%= pagination.current_page - 1 %>" class="material-symbols-outlined prev" data-page_num="<%= pagination.current_page %>">arrow_circle_left</a>
+      <strong><%= pagination.current_page %></strong>
+      <a href="/toprated?page=<%= pagination.current_page + 1 %>" class="material-symbols-outlined next disabled" data-has_next_page="<%= pagination.has_next_page %>">arrow_circle_right</a>
+    </form>
+<% } %>
+
   <%- include('partials/animeGrid') %>
 </div>
 
