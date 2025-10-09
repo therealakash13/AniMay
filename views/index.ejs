@@ -1,7 +1,40 @@
 <%- include('partials/header') %>
 
-<h1>Welcome to AnimeHub</h1>
-<p>Browse and explore anime using the Jikan API.</p>
-<a href="/toprated" class="btn-primary">Explore Top Rated Animes</a>
+<h1>Welcome to AniMay</h1>
+
+ <div class="carousel-container">
+    <% promos.forEach((promo, idx) => { %>
+      <div class="carousel-slide <%= idx === 0 ? 'active' : '' %>">
+        <!-- Background Video -->
+        <div class="carousel-bg">
+          <iframe 
+            src="<%= promo.trailer.embed_url %>&mute=1&autoplay=1&loop=0&playlist=<%= promo.trailer.youtube_id %>" 
+            allow="autoplay; fullscreen">
+          </iframe>
+        </div>
+        <div class="carousel-overlay"></div>
+        
+        <!-- Right Content -->
+        <div class="carousel-content">
+          <div class="content-box">
+            <img src="<%= promo.entry.images.jpg.image_url %>" alt="<%= promo.entry.title %>">
+            <a href="/anime/<%= promo.entry.mal_id %>">
+                <h2><%= promo.entry.title ? promo.entry.title.substring(0,50) + "... " : "NA" %></h2>
+            </a>
+            <p><%= promo.title %></p>
+            <a href="<%= promo.entry.url %>">View on MAL</a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+
+    <!-- Indicators -->
+    <div class="indicators">
+      <% promos.forEach((p, i) => { %>
+        <div class="dot <%= i === 0 ? 'active' : '' %>" data-index="<%= i %>"></div>
+      <% }) %>
+    </div>
+  </div>
+
 
 <%- include('partials/footer') %>

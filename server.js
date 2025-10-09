@@ -12,22 +12,28 @@ const port = 3000;
 const hostname = "https://localhost";
 const api = axios.create({
   baseURL: "https://api.jikan.moe/v4",
-  http: new https.Agent({ family: 6 }),  // Force ipv6
+  http: new https.Agent({ family: 6 }), // Force ipv6
 });
 
 // Middlewares
-server.use(express.static("public"));  // Static file location
-server.use(morgan("tiny"));  // Logging
-server.set("view engine", "ejs");  // Setting view engine to EJS
-server.use(bodyParser.urlencoded({ extended: true }));  // Parsing body in the response
+server.use(express.static("public")); // Static file location
+server.use(morgan("tiny")); // Logging
+server.set("view engine", "ejs"); // Setting view engine to EJS
+server.use(bodyParser.urlencoded({ extended: true })); // Parsing body in the response
 
 // Routes
-server.get("/", (req, res) => {
-  return res.render("index");
+server.get("/", async(req, res) => {
+  try {
+    const result = await api.get("/watch/promos");
+    return res.render("index",{promos:result.data.data});
+  } catch (error) {
+    console.error(error.message||error.code);
+    return res.status(500).json({ message: "Failed to fetch data." });
+  }
 });
 
 server.get("/search", async (req, res) => {
-  const searchString = req.query.query || ""; 
+  const searchString = req.query.query || "";
   const page_num = Number(req.query.page) || 1;
 
   try {
@@ -39,10 +45,10 @@ server.get("/search", async (req, res) => {
       },
     });
 
-    return res.render("search", { 
+    return res.render("search", {
       results: response.data.data,
       pagination: response.data.pagination,
-      search: searchString
+      search: searchString,
     });
   } catch (error) {
     console.error(error);
@@ -85,8 +91,13 @@ server.get("/anime/:id/characters", async (req, res) => {
 server.get("/toprated", async (req, res) => {
   const page_num = Number(req.query.page) || 1;
   try {
-    const response = await api.get("/top/anime", { params: { limit: 12, page: page_num } });        
-    return res.render("toprated", { results: response.data.data , pagination:response.data.pagination});
+    const response = await api.get("/top/anime", {
+      params: { limit: 12, page: page_num },
+    });
+    return res.render("toprated", {
+      results: response.data.data,
+      pagination: response.data.pagination,
+    });
   } catch (error) {
     console.error("Error:", error.code || error.message);
 
@@ -110,7 +121,7 @@ server.get("/recommendation", async (req, res) => {
     );
     return res.render("recommendation", {
       recommendations: response.data.data,
-      pagination:response.data.pagination
+      pagination: response.data.pagination,
     });
   } catch (error) {
     console.error("Error:", error.code || error.message);
@@ -123,7 +134,7 @@ server.get("/recommendation", async (req, res) => {
   }
 });
 
-server.get("/about", (  req,res) => {
+server.get("/about", (req, res) => {
   return res.render("about");
 });
 
