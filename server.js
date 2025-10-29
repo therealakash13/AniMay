@@ -4,15 +4,15 @@ import morgan from "morgan";
 import ejs from "ejs";
 import bodyParser from "body-parser";
 import https from "https";
-// import dns from "dns";
-// dns.setDefaultResultOrder("ipv6first");
+import dns from "dns";
+dns.setDefaultResultOrder("ipv6first");
 
 const server = express();
 const port = 3000;
 const hostname = "http://localhost";
 const api = axios.create({
   baseURL: "https://api.jikan.moe/v4",
-  http: new https.Agent({ family: 6 }), // Force ipv6
+  // http: new https.Agent({ family: 6 }), // Force ipv6
 });
 
 // Middlewares
