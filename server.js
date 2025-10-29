@@ -9,7 +9,7 @@ import https from "https";
 
 const server = express();
 const port = 3000;
-const hostname = "https://localhost";
+const hostname = "http://localhost";
 const api = axios.create({
   baseURL: "https://api.jikan.moe/v4",
   http: new https.Agent({ family: 6 }), // Force ipv6
@@ -22,12 +22,11 @@ server.set("view engine", "ejs"); // Setting view engine to EJS
 server.use(bodyParser.urlencoded({ extended: true })); // Parsing body in the response
 
 // Routes
-server.get("/", async(req, res) => {
+server.get("/", async (req, res) => {
   try {
-    const result = await api.get("/watch/promos");
-    return res.render("index",{promos:result.data.data});
+    return res.render("index");
   } catch (error) {
-    console.error(error.message||error.code);
+    console.error(error.message || error.code);
     return res.status(500).json({ message: "Failed to fetch data." });
   }
 });
