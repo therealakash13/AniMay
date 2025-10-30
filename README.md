@@ -7,6 +7,9 @@
 AniMay is an anime search and browsing web application built with **Node.js**, **Express**, **EJS**, **Axios**, and **jQuery**. The app fetches data from the **Jikan API** and provides features like *search*, *pagination*, and *dynamic UI elements* for a better user experience.
 
   
+## Link
+Here is the live link : [AniMay](https://animay.onrender.com)
+
 
 ## Features
 
